@@ -1,3 +1,10 @@
+//
+//  Option.swift
+//
+//
+//  Created by Mahdi BND on 6/15/24.
+//
+
 import Foundation
 
 public enum Option {
@@ -19,58 +26,44 @@ public enum Option {
     case codec(CodecOption)
     case bitrate(BitrateConfig)
     
-    // Cover picture options
-    case extractFrame(at: Double) // Timestamp in seconds
-    case resize(width: Int, height: Int)
-    case format(String) // e.g., "jpeg", "png"
-    case quality(Int) // Quality setting (e.g., 0-100 for JPEG)
-
     public var option: CommandLiner {
-        switch self {
+        return switch self {
         case let .aqmode(aq):
-            return value(for: aq)
-        case .fastStart:
-            return value(for: Base.fastStart)
-        case .override:
-            return value(for: Base.override)
-        case let .crf(value):
-            return Crf(value)
+            value(for: aq)
+        case .fastStart: 
+            value(for: Base.fastStart)
+        case .override: 
+            value(for: Base.override)
+        case let .crf(value): 
+            Crf(value)
         case let .bufferSize(size):
-            return value(for: size)
-        case let .frame(frame):
-            return value(for: frame)
-        case let .h264Option(option):
-            return value(for: option)
+            value(for: size)
+        case let .frame(frame): 
+            value(for: frame)
+        case let .h264Option(option): 
+            value(for: option)
         case let .lookAhead(amount):
-            return value(for: amount)
+            value(for: amount)
         case let .maxRate(rate):
-            return value(for: rate)
+            value(for: rate)
         case let .pixelFormat(format):
-            return value(for: format)
+            value(for: format)
         case let .preset(preset):
-            return value(for: preset)
+            value(for: preset)
         case let .profile(profile):
-            return value(for: profile)
+            value(for: profile)
         case let .qmin(size):
-            return QMin(size)
+            QMin(size)
         case let .qmax(size):
-            return QMax(size)
+            QMax(size)
         case let .threads(count):
-            return Thread(count)
+            Thread(count)
         case let .tune(option):
-            return value(for: option)
+            value(for: option)
         case let .codec(option):
-            return value(for: option)
+            value(for: option)
         case let .bitrate(config):
-            return value(for: Bitrate(config))
-        case let .extractFrame(at):
-            return ExtractFrame(at)
-        case let .resize(width, height):
-            return Resize(width: width, height: height)
-        case let .format(format):
-            return Format(format)
-        case let .quality(quality):
-            return Quality(quality)
+            value(for: Bitrate(config))
         }
     }
 }
